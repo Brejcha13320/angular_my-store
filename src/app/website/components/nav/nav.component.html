@@ -1,0 +1,65 @@
+<div class="show-mobile">
+  <div>
+    <button (click)="toggleMenu()">
+      <img src="./assets/svg/icon_menu.svg" alt="menu" />
+    </button>
+    <a href="">
+      <img src="./assets/svg/logo_yard_sale.svg" alt="logo" />
+    </a>
+    <a href="">
+      <img src="./assets/svg/icon_shopping_cart.svg" alt="logo" />
+    </a>
+  </div>
+  <div class="side-menu" [class.active]="activeMenu">
+    <button (click)="toggleMenu()">Close</button>
+    <ul>
+      <li><a routerLinkActive="active" routerLink="/home">All</a></li>
+      <li *ngFor="let category of categories">
+        <a
+          routerLinkActive="active"
+          [routerLink]="['/category', category.id]"
+          >{{ category.name }}</a
+        >
+      </li>
+    </ul>
+  </div>
+</div>
+<div class="hide-mobile">
+  <div>
+    <nav>
+      <a class="logo" href="">
+        <img src="./assets/svg/logo_yard_sale.svg" alt="logo" />
+      </a>
+      <ul>
+        <li><a routerLinkActive="active" routerLink="/home">All</a></li>
+        <li *ngFor="let category of categories">
+          <a
+            routerLinkActive="active"
+            [routerLink]="['/category', category.id]"
+            >{{ category.name }}</a
+          >
+        </li>
+      </ul>
+    </nav>
+    <div class="info">
+      <div class="account">
+        <!-- <button (click)="createUser()">Create</button> -->
+        <button *ngIf="!profile; else elseBlock" (click)="login()">
+          Login
+        </button>
+        <ng-template #elseBlock>
+          <a routerLink="/profile">
+            {{ profile?.email }}
+          </a>
+          <button (click)="logOut()">LogOut</button>
+        </ng-template>
+      </div>
+      <div>
+        <a href="">
+          <img src="./assets/svg/icon_shopping_cart.svg" alt="logo" />
+        </a>
+        <span class="counter">{{ counter }}</span>
+      </div>
+    </div>
+  </div>
+</div>
